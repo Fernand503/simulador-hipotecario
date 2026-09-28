@@ -665,8 +665,7 @@ body {
 }
 
 
-.resultado-hero.no-aplica
-.medidor-circular {
+.resultado-hero.no-aplica .medidor-circular {
     background:
             conic-gradient(
                     #ff7474
@@ -686,8 +685,7 @@ body {
 }
 
 
-.resultado-hero.no-aplica
-.medidor-circular::before {
+.resultado-hero.no-aplica .medidor-circular::before {
     background-color: #47232b;
 }
 
@@ -772,9 +770,7 @@ body {
 }
 
 
-#resultado
-.card-body
-.d-flex {
+#resultado .card-body .d-flex {
     gap: 20px;
 
     align-items: center;
@@ -890,23 +886,17 @@ body {
     }
 
 
-    #resultado
-    .card-body
-    .d-flex {
+    #resultado .card-body .d-flex {
         align-items: flex-start;
     }
 
 
-    #resultado
-    .card-body
-    span {
+    #resultado .card-body span {
         max-width: 55%;
     }
 
 
-    #resultado
-    .card-body
-    strong {
+    #resultado .card-body strong {
         text-align: right;
     }
 
