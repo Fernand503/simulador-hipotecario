@@ -48,6 +48,9 @@ btnCalcular.addEventListener("click", function () {
     const plazo =
         Number(document.getElementById("plazo").value);
 
+    const seguroDanosInput =
+        Number(document.getElementById("seguroDanosInput").value);
+
 
     // --------------------------------------
     // VALIDACIONES
@@ -112,6 +115,12 @@ btnCalcular.addEventListener("click", function () {
         return;
     }
 
+    if (seguroDanosInput < 0) {
+
+        alert("El seguro de daños no puede ser negativo.");
+
+        return;
+    }
 
     // ======================================
     // CÁLCULOS
@@ -176,17 +185,20 @@ btnCalcular.addEventListener("click", function () {
 
 
     const seguroDanos =
-        0;
+        seguroDanosInput;
 
 
     // --------------------------------------
     // CUOTA TOTAL
     // --------------------------------------
 
-    const cuotaTotal =
+    const cuotaBanco =
         cuotaHipoteca +
         seguroVida +
-        seguroDanos +
+        seguroDanos;
+
+    const cargaMensualTotal =
+        cuotaBanco +
         otrasCuotas;
 
 
@@ -195,19 +207,13 @@ btnCalcular.addEventListener("click", function () {
     // --------------------------------------
 
     const porcentajeComprometido =
-        (cuotaTotal / ingresos) * 100;
-
+        (cargaMensualTotal / ingresos) * 100;
 
     const cuotaMaxima =
         ingresos * 0.60;
 
-
     const ingresoMinimo =
-        cuotaTotal / 0.60;
-
-
-    const aplica =
-        porcentajeComprometido <= 60;
+        cargaMensualTotal / 0.60;
 
 
     // ======================================
@@ -217,7 +223,7 @@ btnCalcular.addEventListener("click", function () {
     document
         .getElementById("cuotaTotalTexto")
         .textContent =
-        formatoDinero.format(cuotaTotal);
+        formatoDinero.format(cuotaBanco);
 
 
     document
@@ -254,7 +260,7 @@ btnCalcular.addEventListener("click", function () {
     document
         .getElementById("cuotaConOtrasTexto")
         .textContent =
-        formatoDinero.format(cuotaTotal);
+        formatoDinero.format(cargaMensualTotal);
 
 
     document
@@ -432,6 +438,10 @@ btnRestablecer.addEventListener(
             .getElementById("plazo")
             .value = 360;
 
+        document
+            .getElementById("seguroDanosInput")
+            .value = 0;
+
 
         // Ocultamos resultados
         document
@@ -592,15 +602,22 @@ SIMULACIÓN HIPOTECARIA BUENAVENTURA
 Resultado:
 ${resultado}
 
-Cuota mensual total: ${cuotaTotal}
+Cuota mensual del banco: ${cuotaTotal}
 
 Capital + interés: ${capitalInteres}
-Seguro de vida: ${seguroVida}
+Seguro de vida/deuda: ${seguroVida}
 Seguro de daños: ${seguroDanos}
 
 Financiamiento: ${financiamiento}
 Prima: ${prima}
-Cuota hipotecaria + otras cuotas: ${cuotaConOtras}
+
+Otras obligaciones mensuales: ${
+            formatoDinero.format(
+                Number(document.getElementById("otrasCuotas").value)
+            )
+        }
+
+Carga mensual considerada: ${cuotaConOtras}
 
 Ingresos considerados: ${ingresos}
 Ingresos comprometidos: ${porcentaje}
@@ -611,7 +628,7 @@ Plazo: ${plazo} meses
 Tasa nominal anual: ${tasa}%
 
 Cálculo aproximado sujeto a condiciones y evaluación de la institución financiera.
-        `.trim();
+`.trim();
 
 
         // ==================================
