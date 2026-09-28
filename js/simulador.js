@@ -215,6 +215,9 @@ btnCalcular.addEventListener("click", function () {
     const ingresoMinimo =
         cargaMensualTotal / 0.60;
 
+    const aplica =
+        porcentajeComprometido <= 60;
+
 
     // ======================================
     // MOSTRAR RESULTADOS
