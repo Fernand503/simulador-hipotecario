@@ -1,71 +1,330 @@
 /* =========================================
-   SIMULADOR HIPOTECARIO
+   SIMULADOR HIPOTECARIO - BUENAVENTURA
    ========================================= */
 
 
-/* ---------- COLORES GENERALES ---------- */
+/* =========================================
+   COLORES
+   ========================================= */
 
 :root {
+    --cafe-principal: #2f2015;
+    --cafe-oscuro: #1f160f;
+
+    --dorado: #c79a5b;
+    --dorado-claro: #ecd2a4;
+
     --verde-principal: #198754;
     --verde-oscuro: #146c43;
-    --oscuro: #212529;
-    --gris-fondo: #f5f6f8;
+
+    --petroleo: #123c3a;
+    --petroleo-claro: #0f766e;
+
+    --rojo-oscuro: #642833;
+
+    --oscuro: #20252a;
+
+    --fondo: #f5f3ef;
+    --blanco: #ffffff;
+
     --gris-borde: #dee2e6;
-    --texto-secundario: #6c757d;
+    --gris-texto: #6c757d;
 }
 
 
-/* ---------- PÁGINA ---------- */
+/* =========================================
+   PÁGINA
+   ========================================= */
 
 body {
-    background-color: var(--gris-fondo);
-    color: var(--oscuro);
-    font-family: Arial, Helvetica, sans-serif;
     min-height: 100vh;
+
+    margin: 0;
+
+    background:
+            linear-gradient(
+                    180deg,
+                    #f8f6f2 0%,
+                    #f1eee8 100%
+            );
+
+    color: var(--oscuro);
+
+    font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
 }
 
-
-/* ---------- CONTENEDOR ---------- */
 
 .container {
     max-width: 1200px;
 }
 
 
-/* ---------- ENCABEZADO ---------- */
+/* =========================================
+   HERO BUENAVENTURA
+   ========================================= */
 
-h1 {
-    letter-spacing: -1px;
+.hero-buenaventura {
+    position: relative;
+
+    min-height: 430px;
+
+    margin-bottom: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    box-shadow:
+            0 20px 50px rgba(47, 32, 21, 0.20);
 }
 
-.text-center h1 {
-    font-size: 2.5rem;
+
+/* Fachada */
+
+.hero-fondo {
+    position: absolute;
+
+    inset: -40px;
+
+    z-index: 0;
+
+    background-image:
+            url("../assets/img/fachada-buenaventura.jpeg");
+
+    background-size: cover;
+    background-position: center;
+
+    animation:
+            movimientoFachada
+            16s
+            ease-in-out
+            infinite
+            alternate;
 }
 
-.text-center p {
-    font-size: 1rem;
+
+/* Movimiento suave */
+
+@keyframes movimientoFachada {
+
+    0% {
+        transform:
+                scale(1.04)
+                translateX(-1%);
+    }
+
+    50% {
+        transform:
+                scale(1.09)
+                translateX(1%)
+                translateY(-1%);
+    }
+
+    100% {
+        transform:
+                scale(1.13)
+                translateX(-1%)
+                translateY(1%);
+    }
+
 }
 
 
-/* ---------- TARJETAS ---------- */
+/* Oscurecemos ligeramente la foto */
+
+.hero-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+            linear-gradient(
+                    180deg,
+                    rgba(30, 19, 11, 0.05) 0%,
+                    rgba(30, 19, 11, 0.30) 45%,
+                    rgba(24, 14, 8, 0.76) 100%
+            );
+}
+
+
+/* Contenido */
+
+.hero-contenido {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    padding: 48px 25px;
+
+    text-align: center;
+
+    color: white;
+}
+
+
+/* Logo */
+
+.hero-logo {
+    display: block;
+
+    width: min(460px, 82%);
+
+    max-height: 180px;
+
+    object-fit: contain;
+
+    margin:
+            0 auto
+            22px;
+
+    filter:
+            drop-shadow(
+                    0 6px 14px
+                    rgba(0, 0, 0, 0.35)
+            );
+
+    animation:
+            entradaLogo
+            0.9s
+            ease
+            both;
+}
+
+
+@keyframes entradaLogo {
+
+    from {
+        opacity: 0;
+
+        transform:
+                translateY(-16px)
+                scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+                translateY(0)
+                scale(1);
+    }
+
+}
+
+
+/* Línea decorativa */
+
+.hero-linea {
+    width: 80px;
+    height: 3px;
+
+    margin:
+            0 auto
+            18px;
+
+    border-radius: 20px;
+
+    background:
+            linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--dorado-claro),
+                    transparent
+            );
+}
+
+
+/* Texto Hero */
+
+.hero-contenido h1 {
+    margin-bottom: 10px;
+
+    font-size:
+            clamp(
+                    1.9rem,
+                    4vw,
+                    2.9rem
+            );
+
+    font-weight: 700;
+
+    letter-spacing: -0.7px;
+
+    text-shadow:
+            0 3px 10px
+            rgba(0, 0, 0, 0.50);
+}
+
+
+.hero-contenido p {
+    max-width: 650px;
+
+    margin: auto;
+
+    font-size: 1.05rem;
+
+    color:
+            rgba(
+                    255,
+                    255,
+                    255,
+                    0.90
+            );
+
+    text-shadow:
+            0 2px 7px
+            rgba(0, 0, 0, 0.50);
+}
+
+
+/* =========================================
+   TARJETAS
+   ========================================= */
 
 .card {
-    border: 1px solid var(--gris-borde);
-    border-radius: 14px;
     overflow: hidden;
+
+    border:
+            1px solid
+            rgba(47, 32, 21, 0.11);
+
+    border-radius: 16px;
+
+    background-color: var(--blanco);
 }
+
 
 .shadow-sm {
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07) !important;
+    box-shadow:
+            0 7px 24px
+            rgba(47, 32, 21, 0.08)
+    !important;
 }
 
 
-/* ---------- FORMULARIO ---------- */
+/* =========================================
+   FORMULARIO
+   ========================================= */
 
 .form-label {
-    font-weight: 600;
     margin-bottom: 7px;
+
+    font-weight: 600;
+
+    color: #30271f;
 }
+
 
 .form-control,
 .form-select,
@@ -73,32 +332,41 @@ h1 {
     min-height: 46px;
 }
 
+
 .form-control,
 .form-select {
-    border-color: #d8dde3;
+    border-color: #d9d5cf;
 }
+
 
 .input-group-text {
-    background-color: #f8f9fa;
+    border-color: #d9d5cf;
+
+    background-color: #f8f5f0;
+
+    color: var(--cafe-principal);
 }
 
-
-/* Cuando hacemos clic en un campo */
 
 .form-control:focus,
 .form-select:focus {
-    border-color: var(--verde-principal);
+    border-color: var(--dorado);
 
     box-shadow:
-            0 0 0 0.2rem rgba(25, 135, 84, 0.14);
+            0 0 0 0.2rem
+            rgba(199, 154, 91, 0.18);
 }
 
 
-/* ---------- BOTONES ---------- */
+/* =========================================
+   BOTONES
+   ========================================= */
 
 .btn {
     min-height: 47px;
-    border-radius: 8px;
+
+    border-radius: 9px;
+
     font-weight: 600;
 
     transition:
@@ -111,28 +379,44 @@ h1 {
 /* Calcular */
 
 #btnCalcular {
-    background-color: var(--oscuro);
-    border-color: var(--oscuro);
+    background-color: var(--cafe-principal);
+
+    border-color: var(--cafe-principal);
 }
 
-#btnCalcular:hover {
-    background-color: #111417;
-    border-color: #111417;
 
-    transform: translateY(-1px);
+#btnCalcular:hover {
+    background-color: var(--cafe-oscuro);
+
+    border-color: var(--cafe-oscuro);
+
+    transform:
+            translateY(-1px);
 
     box-shadow:
-            0 5px 12px rgba(0, 0, 0, 0.16);
+            0 6px 15px
+            rgba(47, 32, 21, 0.20);
 }
 
 
 /* Restablecer */
 
+#btnRestablecer {
+    border-color: #9e968c;
+
+    color: #62594f;
+}
+
+
 #btnRestablecer:hover {
-    background-color: #6c757d;
+    background-color: #746b61;
+
+    border-color: #746b61;
+
     color: white;
 
-    transform: translateY(-1px);
+    transform:
+            translateY(-1px);
 }
 
 
@@ -140,201 +424,429 @@ h1 {
 
 #btnCopiar {
     background-color: var(--verde-principal);
+
     border-color: var(--verde-principal);
 }
 
-#btnCopiar:hover {
+
+#btnCopiar:hover:not(:disabled) {
     background-color: var(--verde-oscuro);
+
     border-color: var(--verde-oscuro);
 
-    transform: translateY(-1px);
+    transform:
+            translateY(-1px);
 
     box-shadow:
-            0 5px 12px rgba(25, 135, 84, 0.25);
+            0 6px 15px
+            rgba(25, 135, 84, 0.22);
 }
 
 
-/* ---------- RESULTADO COMPLETO ---------- */
+#btnCopiar:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   RESULTADO
+   ========================================= */
 
 #resultado {
     border: none;
 
-    animation: aparecerResultado 0.35s ease;
+    animation:
+            aparecerResultado
+            0.40s
+            ease;
 }
 
-
-/* Animación al aparecer */
 
 @keyframes aparecerResultado {
 
     from {
         opacity: 0;
-        transform: translateY(12px);
+
+        transform:
+                translateY(14px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+                translateY(0);
     }
+
 }
 
 
-/* ---------- SECCIÓN VERDE / ROJA ---------- */
+/* =========================================
+   HERO DEL RESULTADO
+   ========================================= */
 
-#estadoResultado {
-    padding: 30px !important;
+.resultado-hero {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    padding: 36px;
+
+    color: white;
+
+    background:
+            linear-gradient(
+                    135deg,
+                    #111c1b 0%,
+                    var(--petroleo) 55%,
+                    var(--petroleo-claro) 100%
+            );
 
     transition:
-            background-color 0.3s ease;
+            background
+            0.3s ease;
 }
 
 
-/* Resultado */
+/* Cuando NO aplica */
 
-#textoAplica {
-    font-size: 2rem;
-    margin-bottom: 15px;
+.resultado-hero.no-aplica {
+    background:
+            linear-gradient(
+                    135deg,
+                    #241619 0%,
+                    #482029 55%,
+                    var(--rojo-oscuro) 100%
+            );
 }
 
 
-/* ---------- BARRA ---------- */
+/* Información */
 
-.progress {
-    position: relative;
+.resultado-info {
+    flex: 1;
+}
 
-    height: 18px !important;
+
+.resultado-etiqueta {
+    display: inline-block;
+
+    margin-bottom: 14px;
+
+    color: var(--dorado-claro);
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+/* Badge */
+
+.estado-badge {
+    display: inline-flex;
+
+    margin:
+            0 0 18px 12px;
+
+    padding:
+            7px 13px;
+
+    border:
+            1px solid
+            rgba(255, 255, 255, 0.25);
+
+    border-radius: 50px;
 
     background-color:
-            rgba(255, 255, 255, 0.32);
+            rgba(255, 255, 255, 0.11);
 
-    border-radius: 50px;
+    font-size: 0.75rem;
 
-    overflow: hidden;
+    font-weight: 700;
 }
 
 
-/* Barra que avanza */
+#textoAplica {
+    max-width: 650px;
 
-#barraPorcentaje {
-    background-color: white !important;
+    margin-bottom: 14px;
 
-    border-radius: 50px;
+    font-size: 2rem;
 
-    transition:
-            width 0.7s ease;
+    font-weight: 700;
 }
 
 
-/* Marca visual del 60% */
+.resultado-info p {
+    margin-bottom: 8px;
 
-.progress::after {
+    color:
+            rgba(255, 255, 255, 0.88);
+}
+
+
+.resultado-info small {
+    color:
+            rgba(255, 255, 255, 0.62);
+}
+
+
+/* =========================================
+   MEDIDOR CIRCULAR
+   ========================================= */
+
+.medidor-container {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 180px;
+}
+
+
+.medidor-circular {
+    --porcentaje: 0;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 155px;
+    height: 155px;
+
+    border-radius: 50%;
+
+    background:
+            conic-gradient(
+                    var(--dorado-claro)
+                    calc(
+                            var(--porcentaje)
+                            * 1%
+                    ),
+
+                    rgba(
+                            255,
+                            255,
+                            255,
+                            0.16
+                    )
+                    0
+            );
+
+    box-shadow:
+            0 10px 25px
+            rgba(0, 0, 0, 0.16);
+}
+
+
+.medidor-circular::before {
     content: "";
 
     position: absolute;
 
-    left: 60%;
-    top: -4px;
+    width: 121px;
+    height: 121px;
 
-    width: 3px;
-    height: 26px;
+    border-radius: 50%;
 
-    background-color:
-            rgba(0, 0, 0, 0.55);
+    background-color: #173a37;
 }
 
 
-/* ---------- SECCIÓN OSCURA ---------- */
+.resultado-hero.no-aplica
+.medidor-circular {
+    background:
+            conic-gradient(
+                    #ff7474
+                    calc(
+                            var(--porcentaje)
+                            * 1%
+                    ),
+
+                    rgba(
+                            255,
+                            255,
+                            255,
+                            0.16
+                    )
+                    0
+            );
+}
+
+
+.resultado-hero.no-aplica
+.medidor-circular::before {
+    background-color: #47232b;
+}
+
+
+.medidor-centro {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+.medidor-centro strong {
+    font-size: 1.8rem;
+}
+
+
+.medidor-centro span {
+    font-size: 0.75rem;
+
+    color:
+            rgba(255, 255, 255, 0.70);
+}
+
+
+/* =========================================
+   SECCIÓN OSCURA DE CUOTA
+   ========================================= */
 
 #resultado .bg-dark {
-    background-color: #20252a !important;
+    background-color:
+            #20252a
+    !important;
 
-    padding: 30px !important;
+    padding:
+            30px
+    !important;
 }
 
-
-/* Título cuota */
 
 #cuotaTotalTexto {
-    font-size: 3.2rem;
-
     margin-top: 5px;
+
     margin-bottom: 5px;
+
+    font-size: 3.2rem;
 }
 
-
-/* Línea divisora */
 
 #resultado .bg-dark hr {
-    border-color:
-            rgba(255, 255, 255, 0.2);
-
     margin:
             20px 0;
+
+    border-color:
+            rgba(
+                    255,
+                    255,
+                    255,
+                    0.20
+            );
 }
 
 
-/* ---------- RESUMEN ---------- */
+.text-secondary {
+    color:
+            #9ea6ad
+    !important;
+}
+
+
+/* =========================================
+   RESUMEN
+   ========================================= */
 
 #resultado .card-body {
     background-color: white;
 }
 
 
-/* Filas del resumen */
-
-#resultado .card-body .d-flex {
+#resultado
+.card-body
+.d-flex {
     gap: 20px;
 
     align-items: center;
 }
 
 
-/* Valores */
-
 #resultado strong {
     font-weight: 700;
 }
 
 
-/* ---------- TEXTO SECUNDARIO ---------- */
-
-.text-secondary {
-    color: #9aa1a8 !important;
-}
-
-
-/* ---------- RESPONSIVE ---------- */
+/* =========================================
+   TABLET / MÓVIL
+   ========================================= */
 
 @media (max-width: 768px) {
 
     .container {
         padding-left: 14px;
+
         padding-right: 14px;
     }
 
 
     .container.py-5 {
-        padding-top: 25px !important;
-        padding-bottom: 25px !important;
+        padding-top:
+                20px
+        !important;
+
+        padding-bottom:
+                25px
+        !important;
     }
 
 
-    .text-center.mb-5 {
-        margin-bottom: 30px !important;
+    /* Hero */
+
+    .hero-buenaventura {
+        min-height: 340px;
+
+        margin-bottom: 28px;
+
+        border-radius: 17px;
     }
 
 
-    .text-center h1 {
-        font-size: 2rem;
+    .hero-logo {
+        width: 82%;
+
+        max-height: 140px;
     }
 
+
+    .hero-contenido {
+        padding:
+                36px 18px;
+    }
+
+
+    .hero-contenido p {
+        font-size: 0.92rem;
+    }
+
+
+    /* Formulario */
 
     .card-body {
-        padding: 20px !important;
+        padding:
+                20px
+        !important;
     }
 
-
-    /* Botones separados en móvil */
 
     #btnCalcular,
     #btnRestablecer,
@@ -345,8 +857,14 @@ h1 {
 
     /* Resultado */
 
-    #estadoResultado {
-        padding: 22px !important;
+    .resultado-hero {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 25px;
+
+        padding: 26px;
     }
 
 
@@ -355,8 +873,15 @@ h1 {
     }
 
 
+    .medidor-container {
+        width: 100%;
+    }
+
+
     #resultado .bg-dark {
-        padding: 22px !important;
+        padding:
+                22px
+        !important;
     }
 
 
@@ -365,45 +890,56 @@ h1 {
     }
 
 
-    /* Resumen móvil */
-
-    #resultado .card-body .d-flex {
+    #resultado
+    .card-body
+    .d-flex {
         align-items: flex-start;
     }
 
 
-    #resultado .card-body span {
+    #resultado
+    .card-body
+    span {
         max-width: 55%;
     }
 
 
-    #resultado .card-body strong {
+    #resultado
+    .card-body
+    strong {
         text-align: right;
     }
+
 }
 
 
-/* ---------- CELULARES PEQUEÑOS ---------- */
+/* =========================================
+   CELULARES PEQUEÑOS
+   ========================================= */
 
 @media (max-width: 480px) {
 
-    .text-center h1 {
-        font-size: 1.75rem;
+    .hero-buenaventura {
+        min-height: 300px;
+
+        border-radius: 14px;
     }
 
 
-    .text-center p {
-        font-size: 0.9rem;
+    .hero-logo {
+        width: 88%;
+
+        max-height: 115px;
     }
 
 
-    #cuotaTotalTexto {
-        font-size: 2.1rem;
+    .hero-contenido h1 {
+        font-size: 1.65rem;
     }
 
 
-    #textoAplica {
-        font-size: 1.45rem;
+    .hero-contenido p {
+        font-size: 0.87rem;
     }
 
 
@@ -412,202 +948,52 @@ h1 {
     }
 
 
-    #resultado .card-body {
-        font-size: 0.9rem;
-    }
-
-    /* =========================================
-   RESULTADO - IDENTIDAD PROPIA
-   ========================================= */
-
-    .resultado-hero {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 40px;
-
-        padding: 36px;
-
-        color: white;
-
-        background:
-                linear-gradient(
-                        135deg,
-                        #0f172a 0%,
-                        #123c3a 55%,
-                        #0f766e 100%
-                );
+    #textoAplica {
+        font-size: 1.42rem;
     }
 
 
-    /* Información izquierda */
-
-    .resultado-info {
-        flex: 1;
+    #cuotaTotalTexto {
+        font-size: 2.1rem;
     }
 
-    .resultado-etiqueta {
-        display: inline-block;
-
-        margin-bottom: 16px;
-
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 2px;
-
-        color: #d9b76e;
-    }
-
-    .resultado-info h2 {
-        max-width: 650px;
-
-        margin-bottom: 14px;
-
-        font-size: 2rem;
-        font-weight: 700;
-    }
-
-    .resultado-info p {
-        margin-bottom: 8px;
-
-        color: rgba(255, 255, 255, 0.88);
-    }
-
-    .resultado-info small {
-        color: rgba(255, 255, 255, 0.62);
-    }
-
-
-    /* Badge */
-
-    .estado-badge {
-        display: inline-flex;
-
-        margin-bottom: 18px;
-        margin-left: 12px;
-
-        padding: 7px 13px;
-
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        border-radius: 50px;
-
-        background-color: rgba(255, 255, 255, 0.12);
-
-        font-size: 0.75rem;
-        font-weight: 700;
-    }
-
-
-    /* MEDIDOR CIRCULAR */
-
-    .medidor-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        min-width: 180px;
-    }
 
     .medidor-circular {
-        --porcentaje: 0;
+        width: 135px;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        width: 150px;
-        height: 150px;
-
-        border-radius: 50%;
-
-        background:
-                conic-gradient(
-                        #d9b76e calc(var(--porcentaje) * 1%),
-                        rgba(255, 255, 255, 0.18) 0
-                );
-
-        position: relative;
-
-        transition: background 0.6s ease;
+        height: 135px;
     }
 
-
-    /* Hueco interior */
 
     .medidor-circular::before {
-        content: "";
+        width: 105px;
 
-        position: absolute;
-
-        width: 118px;
-        height: 118px;
-
-        border-radius: 50%;
-
-        background-color: #12312f;
+        height: 105px;
     }
 
-
-    /* Texto */
-
-    .medidor-centro {
-        position: relative;
-        z-index: 2;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
 
     .medidor-centro strong {
-        font-size: 1.8rem;
-    }
-
-    .medidor-centro span {
-        font-size: 0.75rem;
-
-        color: rgba(255, 255, 255, 0.7);
+        font-size: 1.55rem;
     }
 
 
-    /* Resultado negativo */
-
-    .resultado-hero.no-aplica {
-        background:
-                linear-gradient(
-                        135deg,
-                        #1f1720,
-                        #5c2029
-                );
+    #resultado .card-body {
+        font-size: 0.90rem;
     }
 
-    .resultado-hero.no-aplica .medidor-circular {
-        background:
-                conic-gradient(
-                        #ff6b6b calc(var(--porcentaje) * 1%),
-                        rgba(255, 255, 255, 0.18) 0
-                );
+}
+
+
+/* =========================================
+   ACCESIBILIDAD
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-fondo,
+    .hero-logo,
+    #resultado {
+        animation: none;
     }
 
-
-    /* RESPONSIVE */
-
-    @media (max-width: 768px) {
-
-        .resultado-hero {
-            flex-direction: column;
-            align-items: flex-start;
-
-            padding: 26px;
-        }
-
-        .medidor-container {
-            width: 100%;
-        }
-
-        .resultado-info h2 {
-            font-size: 1.6rem;
-        }
-
-    }
 }
