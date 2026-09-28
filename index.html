@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Simulador Hipotecario</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <!-- Nuestro CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+<body>
+
+<div class="container py-5">
+
+    <!-- ENCABEZADO -->
+    <div class="text-center mb-5">
+
+        <h1 class="fw-bold">
+            Simulador Hipotecario
+        </h1>
+
+        <p class="text-muted">
+            Calcula una cuota aproximada según los datos de financiamiento.
+        </p>
+
+    </div>
+
+
+    <!-- FORMULARIO -->
+    <div class="card shadow-sm">
+
+        <div class="card-body p-4">
+
+            <h4 class="mb-4">
+                Datos del financiamiento
+            </h4>
+
+
+            <div class="row g-3">
+
+                <!-- Valor propiedad -->
+                <div class="col-md-6">
+
+                    <label
+                            for="precio"
+                            class="form-label">
+                        Valor de la propiedad
+                    </label>
+
+                    <div class="input-group">
+
+                        <span class="input-group-text">
+                            $
+                        </span>
+
+                        <input
+                                type="number"
+                                class="form-control"
+                                id="precio"
+                                placeholder="146910"
+                                min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Prima -->
+                <div class="col-md-6">
+
+                    <label
+                            for="prima"
+                            class="form-label">
+                        Prima
+                    </label>
+
+                    <div class="input-group">
+
+                        <input
+                                type="number"
+                                class="form-control"
+                                id="prima"
+                                value="10"
+                                min="0"
+                                max="99"
+                        >
+
+                        <span class="input-group-text">
+                            %
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Ingresos -->
+                <div class="col-md-6">
+
+                    <label
+                            for="ingresos"
+                            class="form-label">
+                        Ingresos familiares mensuales
+                    </label>
+
+                    <div class="input-group">
+
+                        <span class="input-group-text">
+                            $
+                        </span>
+
+                        <input
+                                type="number"
+                                class="form-control"
+                                id="ingresos"
+                                placeholder="3000"
+                                min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Otras cuotas -->
+                <div class="col-md-6">
+
+                    <label
+                            for="otrasCuotas"
+                            class="form-label">
+                        Otras cuotas mensuales
+                    </label>
+
+                    <div class="input-group">
+
+                        <span class="input-group-text">
+                            $
+                        </span>
+
+                        <input
+                                type="number"
+                                class="form-control"
+                                id="otrasCuotas"
+                                value="0"
+                                min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Tasa -->
+                <div class="col-md-6">
+
+                    <label
+                            for="tasa"
+                            class="form-label">
+                        Tasa nominal anual
+                    </label>
+
+                    <div class="input-group">
+
+                        <input
+                                type="number"
+                                class="form-control"
+                                id="tasa"
+                                value="7.5"
+                                min="0"
+                                step="0.01"
+                        >
+
+                        <span class="input-group-text">
+                            %
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Plazo -->
+                <div class="col-md-6">
+
+                    <label
+                            for="plazo"
+                            class="form-label">
+                        Plazo
+                    </label>
+
+                    <select
+                            class="form-select"
+                            id="plazo">
+
+                        <option value="120">
+                            10 años
+                        </option>
+
+                        <option value="180">
+                            15 años
+                        </option>
+
+                        <option value="240">
+                            20 años
+                        </option>
+
+                        <option value="300">
+                            25 años
+                        </option>
+
+                        <option
+                                value="360"
+                                selected>
+                            30 años
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOTONES -->
+            <div class="row g-2 mt-4">
+
+                <div class="col-md-6">
+
+                    <button
+                            type="button"
+                            class="btn btn-dark w-100"
+                            id="btnCalcular">
+
+                        Calcular financiamiento
+
+                    </button>
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <button
+                            type="button"
+                            class="btn btn-outline-secondary w-100"
+                            id="btnRestablecer">
+
+                        Restablecer
+
+                    </button>
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <button
+                            type="button"
+                            class="btn btn-success w-100 d-flex align-items-center justify-content-center gap-2"
+                            id="btnCopiar"
+                            disabled>
+
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                viewBox="0 0 16 16">
+
+                            <path
+                                    d="M10 1.5v1H6v-1a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5"
+                            />
+
+                            <path
+                                    d="M4.5 2A1.5 1.5 0 0 0 3 3.5v10A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 11.5 2H11v1h.5a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5H5V2z"
+                            />
+
+                        </svg>
+
+                        Copiar datos
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RESULTADOS -->
+    <div
+            id="resultado"
+            class="card shadow-sm mt-4 d-none">
+
+
+        <!-- CAPACIDAD DE PAGO -->
+        <div
+                id="estadoResultado"
+                class="resultado-hero">
+
+            <div class="resultado-info">
+
+                <div class="resultado-etiqueta">
+                    CAPACIDAD DE PAGO
+                </div>
+
+
+                <div
+                        id="badgeEstado"
+                        class="estado-badge">
+
+                    ✓ ELEGIBLE
+
+                </div>
+
+
+                <h2 id="textoAplica">
+                    Sí aplica según los datos ingresados
+                </h2>
+
+
+                <p>
+                    La cuota calculada representa
+
+                    <strong id="porcentajeDescripcion">
+                        0%
+                    </strong>
+
+                    de los ingresos mensuales.
+                </p>
+
+
+                <small>
+                    Límite utilizado para esta simulación: 60%
+                </small>
+
+            </div>
+
+
+            <!-- MEDIDOR CIRCULAR -->
+            <div class="medidor-container">
+
+                <div
+                        id="medidorCircular"
+                        class="medidor-circular">
+
+                    <div class="medidor-centro">
+
+                        <strong id="porcentajeTexto">
+                            0%
+                        </strong>
+
+                        <span>
+                            utilizado
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CUOTA -->
+        <div class="bg-dark text-white p-4">
+
+            <small class="text-uppercase text-secondary">
+                Cuota mensual total
+            </small>
+
+
+            <h1
+                    id="cuotaTotalTexto"
+                    class="display-4 fw-bold">
+
+                $0.00
+
+            </h1>
+
+
+            <p>
+                durante
+                <span id="plazoTexto">0</span>
+                meses ·
+                <span id="tasaTexto">0</span>%
+                nominal anual
+            </p>
+
+
+            <hr>
+
+
+            <div class="d-flex justify-content-between mb-3">
+
+                <span>
+                    🔴 Capital + interés
+                </span>
+
+                <strong id="capitalInteresTexto">
+                    $0.00
+                </strong>
+
+            </div>
+
+
+            <div class="d-flex justify-content-between mb-3">
+
+                <span>
+                    🟡 Seguro de vida deuda
+                </span>
+
+                <strong id="seguroVidaTexto">
+                    $0.00
+                </strong>
+
+            </div>
+
+
+            <div class="d-flex justify-content-between">
+
+                <span>
+                    🔵 Seguro de daños
+                </span>
+
+                <strong id="seguroDanosTexto">
+                    $0.00
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESUMEN -->
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between border-bottom py-3">
+
+                <span>
+                    Financiamiento
+                </span>
+
+                <strong id="financiamientoTexto">
+                    $0.00
+                </strong>
+
+            </div>
+
+
+            <div class="d-flex justify-content-between border-bottom py-3">
+
+                <span>
+                    Prima
+                </span>
+
+                <strong id="primaTexto">
+                    $0.00
+                </strong>
+
+            </div>
+
+
+            <div class="d-flex justify-content-between border-bottom py-3">
+
+                <span>
+                    Cuota hipotecaria + otras cuotas
+                </span>
+
+                <strong id="cuotaConOtrasTexto">
+                    $0.00
+                </strong>
+
+            </div>
+
+
+            <div class="d-flex justify-content-between border-bottom py-3">
+
+                <span>
+                    Ingresos considerados
+                </span>
+
+                <strong id="ingresosTexto">
+                    $0.00
+                </strong>
+
+            </div>
+
+
+            <div class="d-flex justify-content-between border-bottom py-3">
+
+                <span>
+                    Cuota máxima al 60%
+                </span>
+
+                <strong id="cuotaMaximaTexto">
+                    $0.00
+                </strong>
+
+            </div>
+
+
+            <div class="d-flex justify-content-between py-3">
+
+                <span>
+                    Ingreso mínimo requerido
+                </span>
+
+                <strong id="ingresoMinimoTexto">
+                    $0.00
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Bootstrap -->
+<script src="js/bootstrap.bundle.js"></script>
+
+<!-- Nuestro JavaScript -->
+<script src="js/simulador.js"></script>
+
+</body>
+
+</html>

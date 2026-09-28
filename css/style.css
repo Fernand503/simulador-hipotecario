@@ -1,0 +1,613 @@
+/* =========================================
+   SIMULADOR HIPOTECARIO
+   ========================================= */
+
+
+/* ---------- COLORES GENERALES ---------- */
+
+:root {
+    --verde-principal: #198754;
+    --verde-oscuro: #146c43;
+    --oscuro: #212529;
+    --gris-fondo: #f5f6f8;
+    --gris-borde: #dee2e6;
+    --texto-secundario: #6c757d;
+}
+
+
+/* ---------- PÁGINA ---------- */
+
+body {
+    background-color: var(--gris-fondo);
+    color: var(--oscuro);
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+}
+
+
+/* ---------- CONTENEDOR ---------- */
+
+.container {
+    max-width: 1200px;
+}
+
+
+/* ---------- ENCABEZADO ---------- */
+
+h1 {
+    letter-spacing: -1px;
+}
+
+.text-center h1 {
+    font-size: 2.5rem;
+}
+
+.text-center p {
+    font-size: 1rem;
+}
+
+
+/* ---------- TARJETAS ---------- */
+
+.card {
+    border: 1px solid var(--gris-borde);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.shadow-sm {
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07) !important;
+}
+
+
+/* ---------- FORMULARIO ---------- */
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.form-control,
+.form-select,
+.input-group-text {
+    min-height: 46px;
+}
+
+.form-control,
+.form-select {
+    border-color: #d8dde3;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+}
+
+
+/* Cuando hacemos clic en un campo */
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--verde-principal);
+
+    box-shadow:
+            0 0 0 0.2rem rgba(25, 135, 84, 0.14);
+}
+
+
+/* ---------- BOTONES ---------- */
+
+.btn {
+    min-height: 47px;
+    border-radius: 8px;
+    font-weight: 600;
+
+    transition:
+            transform 0.15s ease,
+            box-shadow 0.15s ease,
+            background-color 0.15s ease;
+}
+
+
+/* Calcular */
+
+#btnCalcular {
+    background-color: var(--oscuro);
+    border-color: var(--oscuro);
+}
+
+#btnCalcular:hover {
+    background-color: #111417;
+    border-color: #111417;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+            0 5px 12px rgba(0, 0, 0, 0.16);
+}
+
+
+/* Restablecer */
+
+#btnRestablecer:hover {
+    background-color: #6c757d;
+    color: white;
+
+    transform: translateY(-1px);
+}
+
+
+/* Copiar */
+
+#btnCopiar {
+    background-color: var(--verde-principal);
+    border-color: var(--verde-principal);
+}
+
+#btnCopiar:hover {
+    background-color: var(--verde-oscuro);
+    border-color: var(--verde-oscuro);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+            0 5px 12px rgba(25, 135, 84, 0.25);
+}
+
+
+/* ---------- RESULTADO COMPLETO ---------- */
+
+#resultado {
+    border: none;
+
+    animation: aparecerResultado 0.35s ease;
+}
+
+
+/* Animación al aparecer */
+
+@keyframes aparecerResultado {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---------- SECCIÓN VERDE / ROJA ---------- */
+
+#estadoResultado {
+    padding: 30px !important;
+
+    transition:
+            background-color 0.3s ease;
+}
+
+
+/* Resultado */
+
+#textoAplica {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+
+/* ---------- BARRA ---------- */
+
+.progress {
+    position: relative;
+
+    height: 18px !important;
+
+    background-color:
+            rgba(255, 255, 255, 0.32);
+
+    border-radius: 50px;
+
+    overflow: hidden;
+}
+
+
+/* Barra que avanza */
+
+#barraPorcentaje {
+    background-color: white !important;
+
+    border-radius: 50px;
+
+    transition:
+            width 0.7s ease;
+}
+
+
+/* Marca visual del 60% */
+
+.progress::after {
+    content: "";
+
+    position: absolute;
+
+    left: 60%;
+    top: -4px;
+
+    width: 3px;
+    height: 26px;
+
+    background-color:
+            rgba(0, 0, 0, 0.55);
+}
+
+
+/* ---------- SECCIÓN OSCURA ---------- */
+
+#resultado .bg-dark {
+    background-color: #20252a !important;
+
+    padding: 30px !important;
+}
+
+
+/* Título cuota */
+
+#cuotaTotalTexto {
+    font-size: 3.2rem;
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+/* Línea divisora */
+
+#resultado .bg-dark hr {
+    border-color:
+            rgba(255, 255, 255, 0.2);
+
+    margin:
+            20px 0;
+}
+
+
+/* ---------- RESUMEN ---------- */
+
+#resultado .card-body {
+    background-color: white;
+}
+
+
+/* Filas del resumen */
+
+#resultado .card-body .d-flex {
+    gap: 20px;
+
+    align-items: center;
+}
+
+
+/* Valores */
+
+#resultado strong {
+    font-weight: 700;
+}
+
+
+/* ---------- TEXTO SECUNDARIO ---------- */
+
+.text-secondary {
+    color: #9aa1a8 !important;
+}
+
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 768px) {
+
+    .container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+
+    .container.py-5 {
+        padding-top: 25px !important;
+        padding-bottom: 25px !important;
+    }
+
+
+    .text-center.mb-5 {
+        margin-bottom: 30px !important;
+    }
+
+
+    .text-center h1 {
+        font-size: 2rem;
+    }
+
+
+    .card-body {
+        padding: 20px !important;
+    }
+
+
+    /* Botones separados en móvil */
+
+    #btnCalcular,
+    #btnRestablecer,
+    #btnCopiar {
+        margin-bottom: 4px;
+    }
+
+
+    /* Resultado */
+
+    #estadoResultado {
+        padding: 22px !important;
+    }
+
+
+    #textoAplica {
+        font-size: 1.6rem;
+    }
+
+
+    #resultado .bg-dark {
+        padding: 22px !important;
+    }
+
+
+    #cuotaTotalTexto {
+        font-size: 2.5rem;
+    }
+
+
+    /* Resumen móvil */
+
+    #resultado .card-body .d-flex {
+        align-items: flex-start;
+    }
+
+
+    #resultado .card-body span {
+        max-width: 55%;
+    }
+
+
+    #resultado .card-body strong {
+        text-align: right;
+    }
+}
+
+
+/* ---------- CELULARES PEQUEÑOS ---------- */
+
+@media (max-width: 480px) {
+
+    .text-center h1 {
+        font-size: 1.75rem;
+    }
+
+
+    .text-center p {
+        font-size: 0.9rem;
+    }
+
+
+    #cuotaTotalTexto {
+        font-size: 2.1rem;
+    }
+
+
+    #textoAplica {
+        font-size: 1.45rem;
+    }
+
+
+    .form-label {
+        font-size: 0.95rem;
+    }
+
+
+    #resultado .card-body {
+        font-size: 0.9rem;
+    }
+
+    /* =========================================
+   RESULTADO - IDENTIDAD PROPIA
+   ========================================= */
+
+    .resultado-hero {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+
+        padding: 36px;
+
+        color: white;
+
+        background:
+                linear-gradient(
+                        135deg,
+                        #0f172a 0%,
+                        #123c3a 55%,
+                        #0f766e 100%
+                );
+    }
+
+
+    /* Información izquierda */
+
+    .resultado-info {
+        flex: 1;
+    }
+
+    .resultado-etiqueta {
+        display: inline-block;
+
+        margin-bottom: 16px;
+
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+
+        color: #d9b76e;
+    }
+
+    .resultado-info h2 {
+        max-width: 650px;
+
+        margin-bottom: 14px;
+
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .resultado-info p {
+        margin-bottom: 8px;
+
+        color: rgba(255, 255, 255, 0.88);
+    }
+
+    .resultado-info small {
+        color: rgba(255, 255, 255, 0.62);
+    }
+
+
+    /* Badge */
+
+    .estado-badge {
+        display: inline-flex;
+
+        margin-bottom: 18px;
+        margin-left: 12px;
+
+        padding: 7px 13px;
+
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 50px;
+
+        background-color: rgba(255, 255, 255, 0.12);
+
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+
+    /* MEDIDOR CIRCULAR */
+
+    .medidor-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        min-width: 180px;
+    }
+
+    .medidor-circular {
+        --porcentaje: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 150px;
+        height: 150px;
+
+        border-radius: 50%;
+
+        background:
+                conic-gradient(
+                        #d9b76e calc(var(--porcentaje) * 1%),
+                        rgba(255, 255, 255, 0.18) 0
+                );
+
+        position: relative;
+
+        transition: background 0.6s ease;
+    }
+
+
+    /* Hueco interior */
+
+    .medidor-circular::before {
+        content: "";
+
+        position: absolute;
+
+        width: 118px;
+        height: 118px;
+
+        border-radius: 50%;
+
+        background-color: #12312f;
+    }
+
+
+    /* Texto */
+
+    .medidor-centro {
+        position: relative;
+        z-index: 2;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .medidor-centro strong {
+        font-size: 1.8rem;
+    }
+
+    .medidor-centro span {
+        font-size: 0.75rem;
+
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+
+    /* Resultado negativo */
+
+    .resultado-hero.no-aplica {
+        background:
+                linear-gradient(
+                        135deg,
+                        #1f1720,
+                        #5c2029
+                );
+    }
+
+    .resultado-hero.no-aplica .medidor-circular {
+        background:
+                conic-gradient(
+                        #ff6b6b calc(var(--porcentaje) * 1%),
+                        rgba(255, 255, 255, 0.18) 0
+                );
+    }
+
+
+    /* RESPONSIVE */
+
+    @media (max-width: 768px) {
+
+        .resultado-hero {
+            flex-direction: column;
+            align-items: flex-start;
+
+            padding: 26px;
+        }
+
+        .medidor-container {
+            width: 100%;
+        }
+
+        .resultado-info h2 {
+            font-size: 1.6rem;
+        }
+
+    }
+}
